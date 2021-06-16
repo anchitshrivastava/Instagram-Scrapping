@@ -146,12 +146,13 @@ def combine_csv():
         list_of_df_created.append(globals()['df'+str(i)])
         # return list_df_created
     df = pd.concat(list_of_df_created,ignore_index=True)
-    return get_count(df)
+    df.to_csv("combined.csv")
+    return get_count('combined.csv')
 
 
 def get_count(file):
     data = pd.read_csv(file)
-    output_csv = data.split(".")[0] + "_with_count.csv"
+    output_csv = file.split(".")[0] + "_with_count.csv"
     if not os.path.exists(output_csv):
         csvfile = open(output_csv, 'w', newline='')
         obj = csv.writer(csvfile)
